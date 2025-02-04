@@ -1,7 +1,7 @@
 ## Links
 
 [New Left Review](https://newleftreview.org/)\
-[The Fence](https://www.the-fence.com/)
+[The Fence](https://www.the-fence.com/)\
 [Substack](https://substack.com)\
 [Bluesky](https://bsky.app/)\
 [DIY Listings London](https://diylistingsldn.neocities.org/)\
