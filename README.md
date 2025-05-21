@@ -6,7 +6,7 @@
 [Bluesky](https://bsky.app/)\
 [DIY Listings London](https://diylistingsldn.neocities.org/)\
 [Bandcamp](https://bandcamp.com/)\
-[DataAnnotation](https://app.dataannotation.tech/workers/projects)\
+[MindRift](https://mindrift.toloka.ai/)\
 [photowalk.me](https://www.photowalk.me/photowalk/calendar/2025/2)
 
 
