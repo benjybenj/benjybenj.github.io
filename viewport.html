@@ -95,41 +95,48 @@
     let doit;
 
     function scatterThem() {
-        scatter.forEach(function(s) {
+    scatter.forEach(function(s) {
         let windowWidth = window.innerWidth;
         let windowHeight = window.innerHeight;
-
         let imgWidth = s.offsetWidth;
         let imgHeight = s.offsetHeight;
-
         s.style.position = 'absolute';
         s.style.top  = Math.floor(Math.random() * (windowHeight - imgHeight)) + "px";
         s.style.left = Math.floor(Math.random() * (windowWidth  - imgWidth))  + "px";
 
         s.addEventListener('mouseover', function() {
-            s.style.zIndex = 800;
-            caption.style.display = 'block';
-            caption.innerHTML = s.dataset.title ? s.dataset.title : '';
-            document.querySelector('body').style.background = s.dataset.bg ? s.dataset.bg : 'white';
+        s.style.zIndex = 800;
+        caption.style.display = 'block';
+        caption.innerHTML = s.dataset.title ? s.dataset.title : '';
+        document.querySelector('body').style.background = s.dataset.bg ? s.dataset.bg : '#e6d6c9';
         });
 
         s.addEventListener('mouseout', function() {
-            s.style.zIndex = '';
-            caption.style.display = 'none';
-            document.querySelector('body').style.background = '#e6d6c9';
+        s.style.zIndex = '';
+        caption.style.display = 'none';
+        document.querySelector('body').style.background = '#e6d6c9';
         });
-        });
+    });
     }
 
-    document.addEventListener('mousemove', function(e) {
-        caption.style.left = (e.pageX + 10) + "px";
-        caption.style.top  = (e.pageY + 10) + "px";
+    function waitForImages() {
+    const images = Array.from(scatter);
+    const promises = images.map(img => {
+        if (img.complete) return Promise.resolve();
+        return new Promise(resolve => img.addEventListener('load', resolve));
     });
+    Promise.all(promises).then(scatterThem);
+    }
 
-    document.addEventListener('load', scatterThem());
+    document.addEventListener('DOMContentLoaded', waitForImages);
+
     window.addEventListener('resize', () => {
-        clearTimeout(doit);
-        doit = setTimeout(scatterThem, 100);
+    clearTimeout(doit);
+    doit = setTimeout(scatterThem, 100);
+    });
+    document.addEventListener('mousemove', function(e) {
+    caption.style.left = (e.pageX + 10) + "px";
+    caption.style.top  = (e.pageY + 10) + "px";
     });
     </script>
 <br>
