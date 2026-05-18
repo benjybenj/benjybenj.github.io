@@ -125,7 +125,7 @@
         caption.style.top  = (e.pageY + 10) + "px";
     });
 
-    document.addEventListener('DOMContentLoaded', scatterThem());
+    document.addEventListener('load', scatterThem());
     window.addEventListener('resize', () => {
         clearTimeout(doit);
         doit = setTimeout(scatterThem, 100);
