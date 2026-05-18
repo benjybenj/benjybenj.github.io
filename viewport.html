@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Photos</title>  <!-- CHANGE: page title shown in browser tab -->
+  <style>
+    body {
+      padding: 1em;
+      font-size: 13px;
+      overflow-x: hidden;
+      background: #e6d6c9/* white;           /* CHANGE: default background colour -->
+      font-family: Georgia, serif; /* CHANGE: font -->
+    }
+
+    a {
+      color: black; /* CHANGE: link colour */
+    }
+
+    img {
+      max-width: 20vw; /* CHANGE: how big the images are (20% of screen width) */
+    }
+
+    #caption {
+      max-width: 90vw;
+      position: absolute;
+      z-index: 999;
+      background: white; /* CHANGE: caption box background colour */
+      padding: 4px 8px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html">&larr; Go back</a>  <!-- CHANGE: link text and destination -->
+
+  <!-- ============================================================
+    IMAGES
+    For each image, change:
+      src=        the image filename (put your images in an "img" folder)
+      data-title= the caption shown on hover
+      data-bg=    the background colour shown on hover (any CSS colour name or hex code)
+      rotate(Xdeg) the tilt angle — use negative numbers to tilt the other way
+  =============================================================== -->
+
+  <img src="pics/albino-calf.jpg" class="scatter"
+       data-title="Your caption here"
+       data-bg="seashell"
+       style="transform: rotate(3deg)">
+
+  <img src="pics/beach.jpg" class="scatter"
+       data-title="Your caption here"
+       data-bg="powderblue"
+       style="transform: rotate(-2deg)">
+
+  <img src="pics/market.jpg" class="scatter"
+       data-title="Your caption here"
+       data-bg="papayawhip"
+       style="transform: rotate(1deg)">
+
+  <img src="pics/herzegovina.jpg" class="scatter"
+       data-title="Your caption here"
+       data-bg="mistyrose"
+       style="transform: rotate(-3deg)">
+
+  <img src="pics/pico-de-las-nieves.jpg" class="scatter"
+       data-title="Your caption here"
+       data-bg="lavender"
+       style="transform: rotate(2deg)">
+
+  <!-- To add more images, copy one of the blocks above and paste it here -->
+
+  <div id="caption"></div>
+
+    <script>
+    const caption = document.getElementById('caption');
+    const scatter = document.querySelectorAll('.scatter');
+    let doit;
+
+    function scatterThem() {
+        scatter.forEach(function(s) {
+        let windowWidth = window.innerWidth;
+        let windowHeight = window.innerHeight;
+
+        let imgWidth = s.offsetWidth;
+        let imgHeight = s.offsetHeight;
+
+        s.style.position = 'absolute';
+        s.style.top  = Math.floor(Math.random() * (windowHeight - imgHeight)) + "px";
+        s.style.left = Math.floor(Math.random() * (windowWidth  - imgWidth))  + "px";
+
+        s.addEventListener('mouseover', function() {
+            s.style.zIndex = 800;
+            caption.style.display = 'block';
+            caption.innerHTML = s.dataset.title ? s.dataset.title : '';
+            document.querySelector('body').style.background = s.dataset.bg ? s.dataset.bg : 'white';
+        });
+
+        s.addEventListener('mouseout', function() {
+            s.style.zIndex = '';
+            caption.style.display = 'none';
+            document.querySelector('body').style.background = 'white';
+        });
+        });
+    }
+
+    document.addEventListener('mousemove', function(e) {
+        caption.style.left = (e.pageX + 10) + "px";
+        caption.style.top  = (e.pageY + 10) + "px";
+    });
+
+    document.addEventListener('DOMContentLoaded', scatterThem());
+    window.addEventListener('resize', () => {
+        clearTimeout(doit);
+        doit = setTimeout(scatterThem, 100);
+    });
+    </script>
+
+</body>
+</html>
