@@ -110,13 +110,13 @@
             s.style.zIndex = 800;
             caption.style.display = 'block';
             caption.innerHTML = s.dataset.title ? s.dataset.title : '';
-            document.querySelector('body').style.background = s.dataset.bg ? s.dataset.bg : 'e6d6c9';
+            document.querySelector('body').style.background = s.dataset.bg ? s.dataset.bg : 'white';
         });
 
         s.addEventListener('mouseout', function() {
             s.style.zIndex = '';
             caption.style.display = 'none';
-            document.querySelector('body').style.background = 'white';
+            document.querySelector('body').style.background = '#e6d6c9';
         });
         });
     }
